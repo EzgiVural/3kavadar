@@ -9,7 +9,7 @@ package proje;
  *
  * @author Melike
  */
-public class Product {
+public class Product extends AddProduct{
 
 	private int pId;
 

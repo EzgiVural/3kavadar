@@ -22,10 +22,10 @@ Arrays.asList("maalesef anlasilmadi...", "lutfen tekrarlar misin",
 ArrayList<String> greetingMessageList = new ArrayList<String>(
 Arrays.asList("ooo selammm..", "merhabalar", "mrb"));
 // urun olusturma
-CellPhone cellPhone = new CellPhone(5,"Asus", "Zenphone 3", 16, "Black");
+CellPhone cellPhone = new CellPhone(0,"Asus", "Zenphone 3", 16, "Black",1400);
 ArrayList<CellPhone> cellPhoneList = new ArrayList<CellPhone>();
 cellPhoneList.add(cellPhone);
-cellPhoneList.add(new CellPhone(5,"Apple", "Iphone 7", 64, "Gold"));
+cellPhoneList.add(new CellPhone(1,"Apple", "Iphone 7", 64, "Gold",3000));
 System.out.println("CellPhone:" + cellPhoneList.get(0));
 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 this.setSize(600, 600);
@@ -78,6 +78,7 @@ int decider = (int) (Math.random() * messageList.size());
 txtChat.append("AI: " + messageList.get(decider) + "\n");
 }
 public static void main(String[] args) {
+    
 new Proje();
 }
 }

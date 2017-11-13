@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-//POPOOOOOOOOOOOOO
 package proje;
 
 /**
@@ -20,8 +19,6 @@ import java.util.ArrayList;
 
 import java.util.Arrays;
 
-
-
 import javax.swing.JFrame;
 
 import javax.swing.JScrollPane;
@@ -32,185 +29,150 @@ import javax.swing.JTextField;
 
 import javax.swing.ScrollPaneConstants;
 
-
-
 public class BotHandler extends JFrame {
 
-	private JTextField txtEnter = new JTextField();
+    private JTextField txtEnter = new JTextField();
 
-	private JTextArea txtChat = new JTextArea();
+    private JTextArea txtChat = new JTextArea();
 
+    public BotHandler() {
 
+        final ArrayList<String> exceptionMessageList = new ArrayList<String>(
+                Arrays.asList("maalesef anlasilmadi...", "lutfen tekrarlar misin", "???"));
 
-	public BotHandler() {
+        final ArrayList<String> greetingMessageList = new ArrayList<String>(
+                Arrays.asList("ooo selammm..", "merhabalar", "mrb"));
 
-		final ArrayList<String> exceptionMessageList = new ArrayList<String>(
+        // urun olusturma
+        CellPhone cellPhone = new CellPhone(1, "Asus", "Zenphone 3", 16, "3GB",1400);
 
-				Arrays.asList("maalesef anlasilmadi...", "lutfen tekrarlar misin", "???"));
+        final ArrayList<CellPhone> cellPhoneList = new ArrayList<CellPhone>();
 
+        cellPhoneList.add(cellPhone);
 
+        cellPhoneList.add(new CellPhone(2, "Apple", "Iphone 7", 64, "2GB",3000));
 
-		final ArrayList<String> greetingMessageList = new ArrayList<String>(
+        System.out.println("CellPhone:" + cellPhoneList.get(0));
 
-				Arrays.asList("ooo selammm..", "merhabalar", "mrb"));
+        JScrollPane scrollPane = new JScrollPane(txtChat);
 
+        scrollPane.setBounds(20, 5, 400, 400);
 
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-		// urun olusturma
+        this.setSize(600, 600);
+        txtEnter.setSize(590, 30);
+        this.setSize(600, 600);
+        this.setVisible(true);
+        this.setResizable(false);
+        this.setLayout(null);
+        this.setTitle("Java Bot Example");
+        txtEnter.setLocation(5, 540);
+        txtEnter.requestFocusInWindow();
+        txtChat.setLocation(20, 5);
+        txtChat.setSize(560, 510);
+        txtChat.setEditable(false);
 
-		CellPhone cellPhone = new CellPhone(1, "Asus", "Zenphone 3", 16, "3GB");
+        // elemanlari JFrame'e ekle
+        this.add(txtEnter);
 
-		final ArrayList<CellPhone> cellPhoneList = new ArrayList<CellPhone>();
+        this.setVisible(true);
 
-		cellPhoneList.add(cellPhone);
+        // this.setResizable(false);{
+        this.setLayout(new FlowLayout());
 
-		cellPhoneList.add(new CellPhone(2, "Apple", "Iphone 7", 64, "2GB"));
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		System.out.println("CellPhone:" + cellPhoneList.get(0));
+        this.setTitle("Java Bot Example");
 
+        this.add(scrollPane);
 
+        txtEnter.setLocation(5, 540);
 
-		JScrollPane scrollPane = new JScrollPane(txtChat);
+        txtEnter.setSize(590, 30);
 
-		scrollPane.setBounds(20, 5, 400, 400);
+        // txtEnter.requestFocusInWindow();
+        txtChat.setLocation(20, 5);
 
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        txtChat.setSize(400, 400);
 
+        txtChat.setEditable(false);
 
+        // etkilesim
+        txtEnter.addActionListener(new ActionListener() {
 
-		this.setSize(600, 600);
+            public void actionPerformed(ActionEvent e) {
 
-		// elemanlari JFrame'e ekle
+                String uText = txtEnter.getText();
 
-		this.add(txtEnter);
+                txtChat.append("You: " + uText + "\n");
 
-		this.setVisible(true);
+                txtEnter.setText("");
 
-		// this.setResizable(false);{
+                if (uText.contains("selam")) {
 
-		this.setLayout(new FlowLayout());
+                    // txtChat.append("AI:" + "ooo selamlar" + "\n");
+                    decideRandom(greetingMessageList);
 
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                } else if (uText.contains("urun sececegim")) {
 
-		this.setTitle("Java Bot Example");
+                    // urun secimi
+                    txtChat.append("AI: " + "Lutfen urunu seciniz:" + "\n");
 
-		this.add(scrollPane);
+                    txtChat.append("AI: " + "1: Cep Telefonu" + "\n");
 
+                    txtChat.append("AI: " + "2: Televizyon" + "\n");
 
+                } else if (uText.equals("1")) {
 
-		txtEnter.setLocation(5, 540);
+                    txtChat.append("AI: " + "Cep Telefonu secildi..." + "\n");
 
-		txtEnter.setSize(590, 30);
+                    txtChat.append("AI: " + "Listedeki Telefonlar:" + "\n");
 
-		// txtEnter.requestFocusInWindow();
+                    for (CellPhone cellP : cellPhoneList) {
 
+                        txtChat.append("AI: " + cellP.getpModel() + "\n");
 
-
-		txtChat.setLocation(20, 5);
-
-		txtChat.setSize(400, 400);
-
-		txtChat.setEditable(false);
-
-
-
-		// etkilesim
-
-		txtEnter.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-
-				String uText = txtEnter.getText();
-
-				txtChat.append("You: " + uText + "\n");
-
-				txtEnter.setText("");
-
-
-
-				if (uText.contains("selam")) {
-
-					// txtChat.append("AI:" + "ooo selamlar" + "\n");
-
-					decideRandom(greetingMessageList);
-
-
-
-				} else if (uText.contains("urun sececegim")) {
-
-					// urun secimi
-
-					txtChat.append("AI: " + "Lutfen urunu seciniz:" + "\n");
-
-					txtChat.append("AI: " + "1: Cep Telefonu" + "\n");
-
-					txtChat.append("AI: " + "2: Televizyon" + "\n");
-
-
-
-				} else if (uText.equals("1")) {
-
-					txtChat.append("AI: " + "Cep Telefonu secildi..." + "\n");
-
-					txtChat.append("AI: " + "Listedeki Telefonlar:" + "\n");
-
-					for (CellPhone cellP : cellPhoneList) {
-
-						txtChat.append("AI: " + cellP.getpModel() + "\n");
-
-					}
-                                     /*   if(uText.equals("Zen"))                                           
+                    }
+                    /*   if(uText.equals("Zen"))                                           
                                         {
                                             CellPhone phone 
                                             txtChat.append("AI: " +  + "\n");
                                         }*/
 
+                } else if (uText.equals("2")) {
 
+                    txtChat.append("AI: " + "Televizyon secildi..." + "\n");
 
-				} else if (uText.equals("2")) {
+                } else {
 
-					txtChat.append("AI: " + "Televizyon secildi..." + "\n");
+                    decideRandom(exceptionMessageList);
 
+                }
 
+            }
 
-				} else {
+        });
 
-					decideRandom(exceptionMessageList);
+        // elemanlari JFrame'e ekle
+        this.add(txtEnter);
 
-				}
+        this.add(txtChat);
 
-			}
+    }
 
-		});
+    private void decideRandom(ArrayList<String> messageList) {
 
+        int decider = (int) (Math.random() * messageList.size());
 
+        txtChat.append("AI: " + messageList.get(decider) + "\n");
 
-		// elemanlari JFrame'e ekle
+    }
 
-		// this.add(txtEnter);
+    public static void main(String[] args) {
 
-		// this.add(txtChat);
+        new BotHandler();
 
-	}
-
-
-
-	private void decideRandom(ArrayList<String> messageList) {
-
-		int decider = (int) (Math.random() * messageList.size());
-
-		txtChat.append("AI: " + messageList.get(decider) + "\n");
-
-	}
-
-
-
-	public static void main(String[] args) {
-
-		new BotHandler();
-
-	}
-
-
+    }
 
 }
